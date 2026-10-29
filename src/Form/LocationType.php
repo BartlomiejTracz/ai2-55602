@@ -24,6 +24,7 @@ class LocationType extends AbstractType
             ->add('city', null, [
                 'attr' => [
                     'placeholder'=> 'Enter city name',
+                    'maxlength' => 500,
                 ],
             ])
             ->add('country', ChoiceType::class, [
@@ -35,6 +36,7 @@ class LocationType extends AbstractType
                     'Italy' => 'IT',
                     'United Kingdom' => 'GB',
                     'United States' => 'US',
+                    'Hujolandia' => 'HU'
                 ]
             ])
             ->add('latitude',NumberType::class,[
