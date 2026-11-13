@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Measurment index{% endblock %}
+
+{% block body %}
+    <h1>Measurment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Celsius</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for measurment in measurments %}
+            <tr>
+                <td>{{ measurment.id }}</td>
+                <td>{{ measurment.date ? measurment.date|date('Y-m-d') : '' }}</td>
+                <td>{{ measurment.celsius }}</td>
+                <td>
+                    {% if is_granted('ROLE_MEASURMENT_SHOW') %}
+                    <a href="{{ path('app_measurment_show', {'id': measurment.id}) }}">show</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_MEASURMENT_EDIT') %}
+                    <a href="{{ path('app_measurment_edit', {'id': measurment.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted('ROLE_MESURMENT_NEW') %}
+    <a href="{{ path('app_measurment_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

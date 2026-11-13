@@ -1,0 +1,54 @@
+App\Entity\Location:
+    properties:
+        city:
+            - NotBlank:
+                  groups: [new, edit]
+                  message: 'Nazwa miasta jest wymagana.'
+            - Length:
+                  min: 2
+                  max: 58
+                  groups: [new, edit]
+                  minMessage: 'Dostosuj długość nazwy miasta (za krótkie)'
+                  maxMessage: 'Dostosuj długość nazwy miasta (za długie)'
+        country:
+            - NotBlank:
+                  groups: [new, edit]
+            - Length:
+                  min: 2
+                  max: 2
+                  groups: [new, edit]
+                  exactMessage: 'Dostosuj długość kraju (dokładnie 2 znaki)'
+        latitude:
+            - NotBlank:
+                  groups: [new, edit]
+            - Range:
+                  min: -90.0
+                  max: 90.0
+                  groups: [new, edit]
+                  notInRangeMessage: 'Trzymaj się rzeczywistego przedziału -90 - 90'
+        longitude:
+            - NotBlank:
+                  groups: [new, edit]
+            - Range:
+                  min: -180.0
+                  max: 180.0
+                  groups: [new, edit]
+                  notInRangeMessage: 'Trzymaj się rzeczywistego przedziału -180 - 180'
+
+App\Entity\Measurment:
+    properties:
+        date:
+            - NotBlank:
+                  groups: [new, edit]
+        celsius:
+            - NotBlank:
+                  groups: [new, edit]
+            - Range:
+                  min: -60.0
+                  max: 60.0
+                  groups: [new, edit]
+                  notInRangeMessage: 'Temperatura musi być w przedziale od -60 do 60'
+        location:
+            - NotBlank:
+                  groups: [new, edit]
+                  message: 'Gdzie ten pomiar???'
