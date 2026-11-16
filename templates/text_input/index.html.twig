@@ -32,5 +32,6 @@
     {%if submittedText is not empty %}
         <h2>Submitted Text:</h2>
         <p>{{ submittedText }}</p>
+        <p>{{ submittedText|raw }}</p>
     {% endif %}
 {% endblock %}
