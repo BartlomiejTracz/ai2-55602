@@ -17,10 +17,8 @@ final class TextInputController extends AbstractController
         $submittedText = null;
 
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $submittedText = $data['text'] ?? null;
+            $submittedText = $form->get('text')->getData();
         }
 
         return $this->render('text_input/index.html.twig', [
