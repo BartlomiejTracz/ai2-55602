@@ -1,41 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{#{% block title %}Hello ExternalAPIController!{% endblock %}#}
+{% block title %}Weather Forecast{% endblock %}
 
-{#{% block body %}#}
-{#<style>#}
-{#    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }#}
-{#    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }#}
-{#</style>#}
+{% block body %}
+    <h1>Weather Forecast</h1>
 
-{#<div class="example-wrapper">#}
-{#    <h1>Hello {{ controller_name }}! ✅</h1>#}
+    {{ form_start(form, {'attr': {'data-turbo': 'false'}}) }}
+    {{ form_widget(form) }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
 
-{#    This friendly message is coming from:#}
-{#    <ul>#}
-{#        <li>Your controller at <code>C:/Users/tb55602/Desktop/ai2/lab-b/pogodynka/src/Controller/ExternalAPIController.php</code></li>#}
-{#        <li>Your template at <code>C:/Users/tb55602/Desktop/ai2/lab-b/pogodynka/templates/external_api/index.html.twig</code></li>#}
-{#    </ul>#}
-{#</div>#}
-{#{% endblock %}#}
-
-<h1>Weather Forecast</h1>
-{{ form_start(form) }}
-{{ form_end(form) }}
-<button class="btn">Submit</button>
-{{ form_end(form) }}
-
-{% if weather_data %}
-    <h2>Data from Open Meteo</h2>
-    <table>
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Max Temperature </th>
-            <th>Min Temperature </th>
-            <th>Precipitation </th>
-        </tr>
-        </thead>
-        <tbody>
-            {% for i in 0 %}
-    </table>
+    {% if weather_data %}
+        <h2>Data from Open Meteo</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Max Temperature (°C)</th>
+                <th>Min Temperature (°C)</th>
+                <th>Precipitation (mm)</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in 0..weather_data.daily.time|length - 1 %}
+                <tr>
+                    <td>{{ weather_data.daily.time[i] }}</td>
+                    <td>{{ weather_data.daily.temperature_2m_max[i] }}</td>
+                    <td>{{ weather_data.daily.temperature_2m_min[i] }}</td>
+                    <td>{{ weather_data.daily.precipitation_sum[i] }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

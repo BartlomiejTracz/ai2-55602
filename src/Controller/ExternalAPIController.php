@@ -24,8 +24,7 @@ final class ExternalAPIController extends AbstractController
             $latitude = $data['latitude'];
 
             $apiUrl = sprintf(
-                'https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&daily=temperature_2m_max,
-                temperature_2m_min,precipitation_sum&timezone=UTC',
+                'https://api.open-meteo.com/v1/forecast?latitude=%s&longitude=%s&daily=temperature_2m_max,temperature_2m_min,precipitation_sum&timezone=UTC',
                 $latitude,
                 $longitude
             );
